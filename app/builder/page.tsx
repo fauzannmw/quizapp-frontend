@@ -140,29 +140,25 @@ export default function QuestionBuilder() {
   };
 
   return (
-    <main className="p-6 bg-gray-50 min-h-screen flex justify-center">
-      <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
-          Question Builder
-        </h1>
+    <main className="p-6 bg-gray-100 min-h-screen">
+      <div className="max-w-6xl mx-auto bg-white shadow-md rounded-lg p-6">
+        <h1 className="text-2xl font-bold mb-4">Question Builder</h1>
         <button
           onClick={addSection}
-          className="w-full mb-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
+          className="mb-4 bg-blue-500 text-white px-4 py-2 rounded-lg"
         >
           + Add Section
         </button>
 
         <div className="grid grid-cols-4 gap-4">
-          <div className="col-span-1 bg-gray-100 p-4 rounded-lg shadow">
-            <h2 className="text-lg font-semibold text-gray-700">
-              Question Types
-            </h2>
+          <div className="col-span-1 bg-gray-200 p-4 rounded-lg">
+            <h2 className="text-lg font-semibold">Question Types</h2>
             {QUESTION_TYPES.map((type) => (
               <div
                 key={type.id}
                 draggable
                 onDragStart={() => handleDragStart(type)}
-                className="bg-white p-3 rounded-lg shadow cursor-move mt-2 text-gray-700 border border-gray-300 hover:bg-gray-200"
+                className="bg-gray-300 p-2 rounded-lg cursor-move mt-2"
               >
                 {type.label}
               </div>
@@ -173,7 +169,7 @@ export default function QuestionBuilder() {
             {sections.map((section) => (
               <div
                 key={section.id}
-                className="bg-gray-50 p-4 shadow-md rounded-lg border border-gray-300"
+                className="bg-white p-4 shadow-md rounded-lg border border-gray-300"
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={() => handleDrop(section.id)}
               >
@@ -188,7 +184,7 @@ export default function QuestionBuilder() {
                     <img
                       src={section.media}
                       alt="Uploaded"
-                      className="w-full h-auto rounded-md mb-2 shadow"
+                      className="w-full h-auto rounded-md mb-2"
                     />
                   ) : section.mediaType === "audio" ? (
                     <audio controls className="w-full mb-2">
@@ -231,7 +227,7 @@ export default function QuestionBuilder() {
                 {section.questions.map((question, qIndex) => (
                   <div
                     key={question.id}
-                    className="bg-white p-4 mt-2 rounded-md shadow-md border border-gray-300 cursor-move"
+                    className="bg-gray-100 p-3 mt-2 rounded-md cursor-move"
                     draggable
                     onDragStart={() =>
                       handleDragStartQuestion(section.id, question.id)
@@ -239,13 +235,13 @@ export default function QuestionBuilder() {
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={() => handleDropQuestion(section.id, qIndex)}
                   >
-                    <h3 className="font-semibold text-gray-700">
-                      {question.type.label}
+                    <h3 className="font-semibold">
+                      Question {qIndex + 1}: {question.type.label}
                     </h3>
                     <input
                       type="text"
                       placeholder="Enter your question"
-                      className="w-full mt-2 p-2 border rounded-md focus:ring focus:ring-blue-200"
+                      className="w-full mt-2 p-2 border rounded-md"
                       value={question.text}
                       onChange={(e) =>
                         setSections(
@@ -268,7 +264,7 @@ export default function QuestionBuilder() {
                       onClick={() =>
                         handleDeleteQuestion(section.id, question.id)
                       }
-                      className="mt-2 bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition w-full"
+                      className="mt-2 bg-red-500 text-white px-4 py-2 rounded-lg"
                     >
                       Delete
                     </button>
